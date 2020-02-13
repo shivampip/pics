@@ -5,26 +5,29 @@ import SearchBar from "./SearchBar";
 import ImageList from "./ImageList";
 import unsplash from "../api/unsplash";
 
+import GithubCatRibbon from "github-cat-ribbon";
+
 class App extends React.Component {
-  state = { images: [] };
+	state = { images: [] };
 
-  onTermSubmit = async term => {
-    console.log("Search: " + term);
-    const response = await unsplash.get("/search/photos", {
-      params: { query: term }
-    });
-    console.log(response.data.results);
-    this.setState({ images: response.data.results });
-  };
+	onTermSubmit = async term => {
+		console.log("Search: " + term);
+		const response = await unsplash.get("/search/photos", {
+			params: { query: term }
+		});
+		console.log(response.data.results);
+		this.setState({ images: response.data.results });
+	};
 
-  render() {
-    return (
-      <div>
-        <SearchBar onTermSubmit={this.onTermSubmit} />
-        <ImageList images={this.state.images} />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div>
+				<SearchBar onTermSubmit={this.onTermSubmit} />
+				<ImageList images={this.state.images} />
+				<GithubCatRibbon username="shivampip" reponame="pics" />
+			</div>
+		);
+	}
 }
 
 export default App;
